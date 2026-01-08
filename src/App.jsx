@@ -49,7 +49,9 @@ function App() {
                 The Future of <span className="text-primary">Search Funds</span> is Here
               </h1>
               <h2 className="text-[#4c669a] text-lg md:text-xl font-normal leading-relaxed max-w-[600px] mx-auto">
-                Early access to the platform.
+                Join the exclusive network for serious investors and builders.
+                <br/>
+                 Secure early access to the platform.
               </h2>
             </div>
           </div>
@@ -119,12 +121,12 @@ function App() {
               <div className="flex justify-between items-end mb-2">
                 <p className="text-sm font-medium text-[#4c669a]">Beta Spots Filled</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-sm font-bold text-[#0d121b]">2,418</span>
-                  <span className="text-xs font-medium text-[#4c669a]">/ 3,000</span>
+                  <span className="text-sm font-bold text-[#0d121b]">10</span>
+                  <span className="text-xs font-medium text-[#4c669a]">/ 1000</span>
                 </div>
               </div>
               <div className="w-full bg-[#e7ebf3] rounded-full h-2.5 overflow-hidden">
-                <div className="bg-primary h-full rounded-full w-[80%]" />
+                <div className="bg-primary h-full rounded-full w-[1%]" />
               </div>
             </div>
 
@@ -147,11 +149,11 @@ function App() {
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsgRE4XWYqUF18CBe0SB0hvtMcKXoueEjPWXvorcP5q6uGCyjsS4kYNDt_0ABVR_ZD5iVS_itS_Gu0KJhZ4ti9FZ3WCB8551hc8mhWPe3WlMX4xhAI9sc3GCQSvKW5vanbl34okFFZAA5meotKxwwn9HqhqU7yeSZ9wrnz37yQiLR1doTtQ_zYl-Y4hMGdwQe2An7tfRRMErTOZ-jtIhH48dffxBel0EVVdMRManQxx4_sLYRU78pjXCEzW9qX2PfedKKdW7klrcM"
                 />
                 <div className="h-8 w-8 rounded-full ring-2 ring-white bg-[#f0f2f5] flex items-center justify-center text-xs font-bold text-[#4c669a]">
-                  +2k
+                  +7
                 </div>
               </div>
               <p className="text-[#4c669a] text-sm font-normal text-center">
-                Join 2,000+ investors and searchers waiting for access.
+                Join 10 investors and searchers waiting for access.
               </p>
               <p className="text-[#4c669a]/70 text-xs font-normal text-center">
                 No spam. Unsubscribe anytime.
@@ -171,15 +173,6 @@ function App() {
                   "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbuBpJ34xWiNhxq65RiZzYRDHoOG3VZcMVSUxXs1Km54i9VpL9ixFwkH9Q57X4Z4JYmxT6fDvdOrLwR1b_Sbt2QO7wFqiDEz6yoXjWvawQW2P0O9FMtsO3pbqvqX2KIIpdud47SyZqQtZRna3Qex8x8Kl-SAajIte-FX70D6n-Gve7wLiME040NOGyrp_Yc2ns2HB8IfiDcxvkz4c4JVaJF0SGMqMEqkx6znkua4EALoQbp8EeCTxNnaHT2H9ZlFnK7DalYrH4Q_E')",
               }}
             />
-            <div className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-[#e7ebf3] max-w-xs hidden sm:block">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="material-symbols-outlined text-primary">verified</span>
-                <p className="font-bold text-sm text-[#0d121b]">Deal Flow Access</p>
-              </div>
-              <p className="text-xs text-[#4c669a]">
-                Get priority insights on new acquisition targets before they hit the public market.
-              </p>
-            </div>
           </div>
         </div>
       </main>
