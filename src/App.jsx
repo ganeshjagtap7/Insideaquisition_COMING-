@@ -5,6 +5,43 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [imageErrors, setImageErrors] = useState({});
+
+  // Image sources with fallbacks
+  const avatarImages = {
+    woman: '/images/avatar-woman.jpg',
+    man: '/images/avatar-man.jpg',
+    person: '/images/avatar-person.jpg',
+    background: '/images/background.jpg',
+  };
+
+  // Fallback URLs (original Google URLs)
+  const fallbackUrls = {
+    woman: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDM-hB0lIS97KmzaUI4XPj6x1fSVBPPHn6Nt3Y4d-EntMK2gFYQ9_E2wdocCrXY4yv30HUvO43HABpaI6oW_tlTP_UXWpZ-2fksgOJrfgNZrnUI2_7evw7XOWFQ9-qKTm319WsFRiTPD_NldWBhs85xE93EMdII338eiUDvUtc5-iszLzuPbNUbv_y-2egDrr9wSoFGEjVevKbznTXDZAniMKIuMWYW1ip8hoBLAYZawb_r6vLKQC4HmMiBNV28fcgsqzrTEyKB_fY',
+    man: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAkw96TlDOPCycNUgoRzZqepkWOYaBvYxpD0PVZcyvR0nnSRgOAml7nkGXEV9ar89Xao4fEvhqR-WB9Wi-r1q0l6iS-HJEZ4jrwZaVkDmXIFSfBjfk_nLFLim8hbgbdFklcpHj0FzSapHS6rIx2N-0H7tFKCq5aOzzVOJjeIwuf8JCdIpq2eVpqT8GSZzTGfizDReSWOqHiNpGCi3O7GwprSzgXoGKXom68YITYcIbJT0lB60uioQxkBIWdba1j0X5xmzgBfq-yq-U',
+    person: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCsgRE4XWYqUF18CBe0SB0hvtMcKXoueEjPWXvorcP5q6uGCyjsS4kYNDt_0ABVR_ZD5iVS_itS_Gu0KJhZ4ti9FZ3WCB8551hc8mhWPe3WlMX4xhAI9sc3GCQSvKW5vanbl34okFFZAA5meotKxwwn9HqhqU7yeSZ9wrnz37yQiLR1doTtQ_zYl-Y4hMGdwQe2An7tfRRMErTOZ-jtIhH48dffxBel0EVVdMRManQxx4_sLYRU78pjXCEzW9qX2PfedKKdW7klrcM',
+    background: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBbuBpJ34xWiNhxq65RiZzYRDHoOG3VZcMVSUxXs1Km54i9VpL9ixFwkH9Q57X4Z4JYmxT6fDvdOrLwR1b_Sbt2QO7wFqiDEz6yoXjWvawQW2P0O9FMtsO3pbqvqX2KIIpdud47SyZqQtZRna3Qex8x8Kl-SAajIte-FX70D6n-Gve7wLiME040NOGyrp_Yc2ns2HB8IfiDcxvkz4c4JVaJF0SGMqMEqkx6znkua4EALoQbp8EeCTxNnaHT2H9ZlFnK7DalYrH4Q_E',
+  };
+
+  const handleImageError = (imageKey, e) => {
+    if (!imageErrors[imageKey]) {
+      setImageErrors(prev => ({ ...prev, [imageKey]: true }));
+      // Try fallback URL
+      if (e.target.src !== fallbackUrls[imageKey]) {
+        e.target.src = fallbackUrls[imageKey];
+      }
+    }
+  };
+
+  const getImageSrc = (imageKey) => {
+    return imageErrors[imageKey] ? fallbackUrls[imageKey] : avatarImages[imageKey];
+  };
+
+  const getBackgroundImage = () => {
+    return imageErrors.background 
+      ? fallbackUrls.background 
+      : avatarImages.background;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,17 +173,20 @@ function App() {
                 <img
                   alt="Profile of a young woman"
                   className="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM-hB0lIS97KmzaUI4XPj6x1fSVBPPHn6Nt3Y4d-EntMK2gFYQ9_E2wdocCrXY4yv30HUvO43HABpaI6oW_tlTP_UXWpZ-2fksgOJrfgNZrnUI2_7evw7XOWFQ9-qKTm319WsFRiTPD_NldWBhs85xE93EMdII338eiUDvUtc5-iszLzuPbNUbv_y-2egDrr9wSoFGEjVevKbznTXDZAniMKIuMWYW1ip8hoBLAYZawb_r6vLKQC4HmMiBNV28fcgsqzrTEyKB_fY"
+                  src={getImageSrc('woman')}
+                  onError={(e) => handleImageError('woman', e)}
                 />
                 <img
                   alt="Profile of a young man"
                   className="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkw96TlDOPCycNUgoRzZqepkWOYaBvYxpD0PVZcyvR0nnSRgOAml7nkGXEV9ar89Xao4fEvhqR-WB9Wi-r1q0l6iS-HJEZ4jrwZaVkDmXIFSfBjfk_nLFLim8hbgbdFklcpHj0FzSapHS6rIx2N-0H7tFKCq5aOzzVOJjeIwuf8JCdIpq2eVpqT8GSZzTGfizDReSWOqHiNpGCi3O7GwprSzgXoGKXom68YITYcIbJT0lB60uioQxkBIWdba1j0X5xmzgBfq-yq-U"
+                  src={getImageSrc('man')}
+                  onError={(e) => handleImageError('man', e)}
                 />
                 <img
                   alt="Profile of a person"
                   className="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsgRE4XWYqUF18CBe0SB0hvtMcKXoueEjPWXvorcP5q6uGCyjsS4kYNDt_0ABVR_ZD5iVS_itS_Gu0KJhZ4ti9FZ3WCB8551hc8mhWPe3WlMX4xhAI9sc3GCQSvKW5vanbl34okFFZAA5meotKxwwn9HqhqU7yeSZ9wrnz37yQiLR1doTtQ_zYl-Y4hMGdwQe2An7tfRRMErTOZ-jtIhH48dffxBel0EVVdMRManQxx4_sLYRU78pjXCEzW9qX2PfedKKdW7klrcM"
+                  src={getImageSrc('person')}
+                  onError={(e) => handleImageError('person', e)}
                 />
                 <div className="h-8 w-8 rounded-full ring-2 ring-white bg-[#f0f2f5] flex items-center justify-center text-xs font-bold text-[#4c669a]">
                   +7
@@ -166,12 +206,11 @@ function App() {
         <div className="mt-20 w-full max-w-[960px] px-4">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#e7ebf3] bg-white">
             <div className="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent z-10 opacity-20" />
-            <div
-              className="bg-cover bg-center h-[300px] md:h-[400px] opacity-90"
-              style={{
-                backgroundImage:
-                  "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbuBpJ34xWiNhxq65RiZzYRDHoOG3VZcMVSUxXs1Km54i9VpL9ixFwkH9Q57X4Z4JYmxT6fDvdOrLwR1b_Sbt2QO7wFqiDEz6yoXjWvawQW2P0O9FMtsO3pbqvqX2KIIpdud47SyZqQtZRna3Qex8x8Kl-SAajIte-FX70D6n-Gve7wLiME040NOGyrp_Yc2ns2HB8IfiDcxvkz4c4JVaJF0SGMqMEqkx6znkua4EALoQbp8EeCTxNnaHT2H9ZlFnK7DalYrH4Q_E')",
-              }}
+            <img
+              src={getBackgroundImage()}
+              alt="Platform preview"
+              className="w-full h-[300px] md:h-[400px] object-cover opacity-90"
+              onError={(e) => handleImageError('background', e)}
             />
           </div>
         </div>
